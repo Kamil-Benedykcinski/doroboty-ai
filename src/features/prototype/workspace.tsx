@@ -178,13 +178,13 @@ export function ProfilePage({ preview = false }: { preview?: boolean }) {
         {preview ? person.name : "Twój profil"}
       </PageTitle>
       {preview ? (
-        <div className="prototype-panel space-y-4">
+        <div className="prototype-panel ph-no-capture space-y-4">
           <h2>{person.headline}</h2>
           <p>{person.location}</p>
           <p>{person.bio}</p>
         </div>
       ) : (
-        <form onSubmit={save} className="prototype-panel prototype-form">
+        <form onSubmit={save} className="prototype-panel ph-no-capture prototype-form">
           <Field label="Imię i nazwisko">
             <Input name="name" required maxLength={200} defaultValue={person.name} />
           </Field>
@@ -201,7 +201,7 @@ export function ProfilePage({ preview = false }: { preview?: boolean }) {
           {message && <p role="status">{message}</p>}
         </form>
       )}
-      <section className="prototype-panel mt-6">
+      <section className="prototype-panel ph-no-capture mt-6">
         <h2 className="mb-4 flex items-center gap-2">
           <FileText className="size-5" />
           CV
@@ -312,7 +312,7 @@ export function ApplyPage() {
         <form
           noValidate
           onSubmit={submit}
-          className="record-sheet application-form"
+          className="ph-no-capture record-sheet application-form"
           aria-labelledby="application-form-title"
         >
           <header className="application-form-intro">

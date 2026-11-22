@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
+import { usePostHog } from "@posthog/react";
 import { initialState, transition, type Action, type State } from "./model";
 import {
   parseState,
@@ -17,6 +18,7 @@ function browserStorage(): StoragePort | null {
   }
 }
 function useStore() {
+  const posthog = usePostHog();
   const [loaded] = useState(() => readState(browserStorage()));
   const [state, setState] = useState(loaded.state);
   const [issue, setIssue] = useState(loaded.issue);
@@ -24,6 +26,7 @@ function useStore() {
   const [blocked, setBlocked] = useState(loaded.blocked);
   const expectedRaw = useRef(readStoredRaw(browserStorage()));
   const latest = useRef(state);
+  const identifiedPersonId = useRef<string | null>(null);
   function commit(next: State, replace = false) {
     if (blocked && !replace) return;
     const storage = browserStorage();
@@ -68,6 +71,22 @@ function useStore() {
       return false;
     }
   }
+  useEffect(() => {
+    const person = state.people.find((item) => item.id === state.activePersonId);
+    if (!person) {
+      if (identifiedPersonId.current !== null) {
+        posthog.reset();
+        identifiedPersonId.current = null;
+      }
+      return;
+    }
+    if (identifiedPersonId.current !== null && identifiedPersonId.current !== person.id) {
+      posthog.reset();
+    }
+    posthog.identify(person.id, { name: person.name, role: person.role });
+    identifiedPersonId.current = person.id;
+  }, [posthog, state.activePersonId, state.people]);
+
   useEffect(() => {
     document.documentElement.classList.remove("dark");
     function handleStorage(event: StorageEvent) {

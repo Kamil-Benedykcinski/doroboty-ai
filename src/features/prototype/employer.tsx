@@ -152,7 +152,7 @@ export function EmployerJobEditor() {
   return (
     <>
       <PageTitle>{existing ? "Edytuj ofertę" : "Nowa oferta"}</PageTitle>
-      <form className="prototype-form" onSubmit={publish}>
+      <form className="ph-no-capture prototype-form" onSubmit={publish}>
         <Field label="Nazwa stanowiska">
           <Input
             required
@@ -192,7 +192,7 @@ export function EmployerJobEditor() {
           </Button>
         </div>
         {generated && (
-          <section className="prototype-panel">
+          <section className="ph-no-capture prototype-panel">
             <h2 className="mb-4">Propozycja opisu</h2>
             <p className="whitespace-pre-wrap">{generated}</p>
             <Button
@@ -310,7 +310,7 @@ export function CompanyEditor() {
   return (
     <>
       <PageTitle>Twoja organizacja</PageTitle>
-      <form className="prototype-panel prototype-form" onSubmit={save}>
+      <form className="prototype-panel ph-no-capture prototype-form" onSubmit={save}>
         <Field label="Nazwa firmy">
           <Input name="name" required maxLength={200} defaultValue={company.name} />
         </Field>

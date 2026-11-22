@@ -4,6 +4,7 @@ import { ProcessTimeline } from "@/components/process-timeline";
 import { RecordSheet } from "@/components/record-sheet";
 import { CvAttachment } from "./cv-attachment";
 import { MatchScore } from "./match-score";
+import { WorkEvidenceCard } from "./work-evidence-card";
 import { stageLabels, type Application, type Stage } from "./model";
 
 type RecordEvent = { stage: Stage; at: string; note?: string };
@@ -21,10 +22,19 @@ export function ApplicationRecord({
   statusRef,
   children,
   footer,
+  onQuestionSelect,
 }: {
   application: Pick<
     Application,
-    "candidateId" | "candidateName" | "jobTitle" | "stage" | "answer" | "cv" | "score" | "summary"
+    | "candidateId"
+    | "candidateName"
+    | "jobTitle"
+    | "stage"
+    | "answer"
+    | "cv"
+    | "score"
+    | "summary"
+    | "workEvidence"
   >;
   companyName: string;
   audience: "candidate" | "employer";
@@ -32,6 +42,7 @@ export function ApplicationRecord({
   statusRef?: Ref<HTMLSpanElement>;
   children?: ReactNode;
   footer?: ReactNode;
+  onQuestionSelect?: (question: string) => void;
 }) {
   const candidate = audience === "candidate";
   const title = candidate ? application.jobTitle : application.candidateName;
@@ -93,6 +104,20 @@ export function ApplicationRecord({
                 </>
               ),
             },
+            ...(application.workEvidence
+              ? [
+                  {
+                    value: "evidence",
+                    label: "Dowód pracy",
+                    content: (
+                      <WorkEvidenceCard
+                        evidence={application.workEvidence}
+                        onQuestionSelect={audience === "employer" ? onQuestionSelect : undefined}
+                      />
+                    ),
+                  },
+                ]
+              : []),
           ]}
           footer={footer}
         >

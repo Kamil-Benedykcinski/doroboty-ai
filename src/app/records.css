@@ -275,6 +275,10 @@
   }
 }
 @media (max-width: 600px) {
+  .record-tabs {
+    flex-wrap: wrap;
+    gap: 4px 8px;
+  }
   .record-breadcrumb {
     margin-bottom: 20px;
     font-size: 12px;
@@ -336,4 +340,103 @@
   border: 1px solid var(--gui-edge);
   border-radius: 10px;
   background: var(--gui-canvas);
+}
+.work-evidence-card {
+  display: grid;
+  gap: 1.25rem;
+}
+.work-evidence-intro {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid var(--gui-border);
+  padding-bottom: 1rem;
+}
+.work-evidence-intro h3 {
+  margin: 0.25rem 0 0;
+}
+.work-evidence-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid var(--gui-border);
+  background: var(--gui-surface-muted);
+  padding: 0.4rem 0.6rem;
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+.work-evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 1.5rem;
+  margin: 0;
+}
+.work-evidence-grid > div {
+  border-top: 1px solid var(--gui-border);
+  padding-top: 0.75rem;
+}
+.work-evidence-grid dt {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.work-evidence-grid dd {
+  margin: 0.5rem 0 0;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+.work-evidence-measurement {
+  background: var(--gui-surface-muted);
+  padding: 0.75rem;
+}
+.work-evidence-questions {
+  border-top: 2px solid var(--gui-ink);
+  padding-top: 1rem;
+}
+.work-evidence-question-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.work-evidence-question-heading h4 {
+  margin: 0;
+}
+.work-evidence-questions ul {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0.85rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.work-evidence-questions li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-top: 1px solid var(--gui-border);
+  padding-top: 0.75rem;
+  min-width: 0;
+}
+.work-evidence-questions li span {
+  line-height: 1.45;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 600px) {
+  .work-evidence-intro,
+  .work-evidence-questions li {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .work-evidence-grid {
+    grid-template-columns: 1fr;
+  }
+  .work-evidence-questions li .button {
+    width: 100%;
+  }
 }

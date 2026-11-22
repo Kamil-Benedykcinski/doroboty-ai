@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "description": "Local agent handoff extracted from the accepted DoRoboty.ai interface.",
-  "engines": {"node": ">=24 <25"},
+  "engines": {"node": "26.13.1"},
   "scripts": {
     "dev": "node scripts/serve.mjs",
     "check": "node scripts/check.mjs",

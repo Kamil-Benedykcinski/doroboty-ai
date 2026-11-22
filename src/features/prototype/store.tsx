@@ -1,6 +1,14 @@
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import { initialState, transition, type Action, type State } from "./model";
-import { parseState, readState, saveState, type StoragePort } from "./storage";
+import {
+  parseState,
+  readState,
+  readStoredRaw,
+  saveState,
+  serializeState,
+  STORAGE_KEY,
+  type StoragePort,
+} from "./storage";
 function browserStorage(): StoragePort | null {
   try {
     return window.localStorage;
@@ -14,14 +22,23 @@ function useStore() {
   const [issue, setIssue] = useState(loaded.issue);
   const [error, setError] = useState("");
   const [blocked, setBlocked] = useState(loaded.blocked);
+  const expectedRaw = useRef(readStoredRaw(browserStorage()));
   const latest = useRef(state);
   function commit(next: State, replace = false) {
+    if (blocked && !replace) return;
+    const storage = browserStorage();
+    if (readStoredRaw(storage) !== expectedRaw.current) {
+      setIssue(
+        "Dane zmieniły się w innej karcie. Zapis zatrzymano, aby nie nadpisać cudzych zmian. Eksportuj swój stan, odśwież stronę i wczytaj potrzebne zmiany ponownie.",
+      );
+      return;
+    }
     latest.current = next;
     setState(next);
     setError("");
-    if (blocked && !replace) return;
     try {
-      saveState(browserStorage(), next);
+      saveState(storage, next);
+      expectedRaw.current = serializeState(next);
       setIssue("");
       if (replace) setBlocked(false);
     } catch (e) {
@@ -53,6 +70,15 @@ function useStore() {
   }
   useEffect(() => {
     document.documentElement.classList.remove("dark");
+    function handleStorage(event: StorageEvent) {
+      if (event.storageArea === window.localStorage && event.key === STORAGE_KEY) {
+        setIssue(
+          "Dane zmieniły się w innej karcie. Twoje kolejne zapisanie zostanie zatrzymane, aby nie nadpisać tych zmian.",
+        );
+      }
+    }
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
   }, []);
   return {
     state,

@@ -2,7 +2,7 @@
 
 Start with [design.md](design.md). This local package reuses the accepted standalone prototype and preserves its detailed [designer reference](reference/index.html).
 
-Requires Node 24. No runtime dependencies or build step.
+Requires Node 26.13.1. No runtime dependencies or build step.
 
 ```sh
 npm run check

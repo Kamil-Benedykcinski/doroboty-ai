@@ -4,6 +4,7 @@ import {
   MAX_IMPORT_BYTES,
   parseState,
   readState,
+  readStoredRaw,
   saveState,
   serializeState,
   STORAGE_KEY,
@@ -55,6 +56,13 @@ describe("browser persistence and recovery", () => {
     };
     expect(() => saveState(storage, initialState())).toThrow("Wyeksportuj");
     expect(storage.getItem()).toBe(old);
+  });
+  it("reads the current raw value for concurrent-write checks", () => {
+    const storage = memory();
+    expect(readStoredRaw(storage)).toBeNull();
+    saveState(storage, initialState());
+    expect(readStoredRaw(storage)).toBe(serializeState(initialState()));
+    expect(readStoredRaw(null)).toBeNull();
   });
   it("rejects invalid references and oversized files", () => {
     const s = initialState();

@@ -8,7 +8,18 @@
     "location": "Warszawa",
     "cv": "Anna Kowalska — Product Manager\n2022–2026: prowadzenie rozwoju narzędzi dla zespołów operacyjnych. Badania z 18 użytkownikami, priorytetyzacja i wdrożenie asystenta do zgłoszeń. Skrócenie czasu obsługi o 30%.\n2019–2022: Product Analyst. Analiza lejków i eksperymenty A/B.\nUmiejętności: discovery, analityka produktu, współpraca z inżynierami, prototypowanie AI.",
     "exampleScore": 84,
-    "exampleSummary": "Doświadczenie w badaniach użytkowników i wdrażaniu automatyzacji. Warto porozmawiać o sposobie mierzenia efektów i współpracy z zespołem."
+    "exampleSummary": "Doświadczenie w badaniach użytkowników i wdrażaniu automatyzacji. Warto porozmawiać o sposobie mierzenia efektów i współpracy z zespołem.",
+    "workEvidence": {
+      "problem": "Zespoły operacyjne traciły czas na ręczne porządkowanie powtarzalnych zgłoszeń.",
+      "contribution": "Anna przeprowadziła badania z 18 użytkownikami, uporządkowała priorytety i poprowadziła wdrożenie asystenta do obsługi zgłoszeń.",
+      "outcome": "Zespół skrócił czas obsługi zgłoszeń o 30%.",
+      "measurement": "Efekt mierzono porównaniem czasu obsługi przed i po wdrożeniu; brakuje informacji o okresie pomiaru i liczbie zgłoszeń.",
+      "interviewQuestions": [
+        "Które decyzje w tym projekcie podjęłaś samodzielnie?",
+        "Jak wykluczyłaś, że skrócenie czasu wynikało ze zmiany rodzaju zgłoszeń?",
+        "Pokaż sytuację, w której asystent nie powinien automatyzować odpowiedzi."
+      ]
+    }
   },
   {
     "id": "candidate-marek",
@@ -19,7 +30,18 @@
     "location": "Kraków",
     "cv": "Marek Nowak — Product Owner\n2021–2026: rozwój platformy B2B. Automatyzacja obsługi zgłoszeń i skrócenie czasu odpowiedzi o 25%. Prowadzenie warsztatów z użytkownikami, praca z backlogiem i zespołem wdrożeniowym.",
     "exampleScore": 72,
-    "exampleSummary": "Doświadczenie w produktach B2B i automatyzacji obsługi. Podczas rozmowy warto doprecyzować zakres samodzielnych decyzji."
+    "exampleSummary": "Doświadczenie w produktach B2B i automatyzacji obsługi. Podczas rozmowy warto doprecyzować zakres samodzielnych decyzji.",
+    "workEvidence": {
+      "problem": "Obsługa zgłoszeń B2B była zbyt wolna, a zespół potrzebował lepszego sposobu kwalifikowania spraw.",
+      "contribution": "Marek poprowadził warsztaty z użytkownikami, uporządkował backlog i współpracował z zespołem wdrożeniowym przy automatyzacji obsługi.",
+      "outcome": "Czas odpowiedzi skrócił się o 25%.",
+      "measurement": "Wynik pochodzi z porównania czasu odpowiedzi przed i po zmianie; brakuje danych o okresie pomiaru i wpływie na jakość obsługi.",
+      "interviewQuestions": [
+        "Który element rozwiązania zmieniłeś osobiście?",
+        "Jak podjąłeś decyzję, gdy potrzeby użytkowników kolidowały z zakresem wdrożenia?",
+        "Jak sprawdziłeś, że krótszy czas odpowiedzi nie oznaczał gorszych odpowiedzi?"
+      ]
+    }
   },
   {
     "id": "employer-brightlabs",

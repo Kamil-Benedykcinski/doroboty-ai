@@ -65,6 +65,13 @@ export const profileSchema = z.object({
   bio: text,
   location: shortText,
 });
+const workEvidenceSchema = z.object({
+  problem: text,
+  contribution: text,
+  outcome: text,
+  measurement: text,
+  interviewQuestions: z.array(shortText).max(8),
+});
 const personSchema = profileSchema.extend({
   id,
   role: z.enum(["candidate", "employer", "operator"]),
@@ -72,6 +79,7 @@ const personSchema = profileSchema.extend({
   cv: text,
   exampleScore: z.number().int().min(0).max(100),
   exampleSummary: text,
+  workEvidence: workEvidenceSchema.optional(),
 });
 export const stages = [
   "submitted",
@@ -117,6 +125,7 @@ const applicationSchema = z.object({
   generatedAnswer: text,
   score: z.number().int().min(0).max(100),
   summary: text,
+  workEvidence: workEvidenceSchema.optional(),
   stage: z.enum(stages),
   events: z
     .array(z.object({ stage: z.enum(stages), at: z.iso.datetime(), note: text }))
@@ -241,6 +250,7 @@ export function initialState(): State {
     generatedAnswer: "",
     score: bob.exampleScore,
     summary: bob.exampleSummary,
+    workEvidence: bob.workEvidence,
     stage: "submitted",
     events: [{ stage: "submitted", at: "2026-11-02T09:00:00.000Z", note: "" }],
   });
@@ -312,6 +322,7 @@ export function transition(
         generatedAnswer: action.generated,
         score: p.exampleScore,
         summary: p.exampleSummary,
+        workEvidence: p.workEvidence,
         stage: "submitted",
         events: [{ stage: "submitted", at: now, note: "" }],
       }),

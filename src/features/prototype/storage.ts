@@ -19,6 +19,14 @@ export function parseState(raw: string): State {
 export function serializeState(state: State) {
   return JSON.stringify(state, null, 2);
 }
+export function readStoredRaw(storage: StoragePort | null) {
+  if (!storage) return null;
+  try {
+    return storage.getItem(STORAGE_KEY);
+  } catch {
+    return null;
+  }
+}
 export function readState(storage: StoragePort | null) {
   if (!storage)
     return {

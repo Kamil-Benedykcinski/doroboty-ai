@@ -29,6 +29,11 @@ export function RecruitingApplication({ application }: { application: Applicatio
         audience="employer"
         history={application.events}
         statusRef={statusRef}
+        onQuestionSelect={(question) =>
+          setNote((current) =>
+            current.includes(question) ? current : current ? `${current}\n${question}` : question,
+          )
+        }
         footer={
           availableStages.length > 0 ? (
             <>

@@ -3,7 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
 const root = path.resolve(fileURLToPath(new URL('../', import.meta.url)));
-if (process.versions.node.split('.')[0] !== '24') throw new Error('Use Node 24 (see .nvmrc).');
+if (process.versions.node !== '26.13.1') throw new Error('Use Node 26.13.1 (see .nvmrc).');
 const walk = dir => fs.readdirSync(dir, {withFileTypes:true}).flatMap(entry => entry.isDirectory() ? walk(path.join(dir,entry.name)) : [path.join(dir,entry.name)]);
 const files = walk(root);
 let links = 0;
